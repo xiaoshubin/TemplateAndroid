@@ -79,7 +79,7 @@ databinding生成的对应`ActivityMainBinding`路径为`com.xiao.temp.databindi
 
 #### 除了SmallUtils里面的工具类，其他的工具类
 
-1.Banner工具类[BannerUtils](https://github.com/xiaoshubin/TemplateAndroid/blob/master/app/src/main/java/com/xqd/catplay/utils/BannerUtils.java)，快速构建Banner通用轮播图
+1.Banner工具类[BannerUtils](https://github.com/xiaoshubin/TemplateAndroid/blob/master/app/src/main/java/com/smallcake/template/utils/BannerUtils.java)，快速构建Banner通用轮播图
 
 2.TabLayout工具类[TabUtils](https://github.com/xiaoshubin/TemplateAndroid/blob/master/app/src/main/java/com/smallcake/template/utils/TabUtils.java),用来代替系统自带TabLayout无法满足的情况。
 
@@ -91,13 +91,13 @@ databinding生成的对应`ActivityMainBinding`路径为`com.xiao.temp.databindi
 
 6，[LocationUtils](https://github.com/xiaoshubin/TemplateAndroid/blob/master/app/src/main/java/com/smallcake/template/utils/LocationUtils.java),定位工具类，采用安卓系统定位获取经纬度，以及通过传入的位置信息获取经纬度
 
-7，[CirclePercentView](https://github.com/xiaoshubin/TemplateAndroid/blob/master/app/src/main/java/com/smallcake/template/utils/custom/CirclePercentView.java),圆形进度条
+7，[CirclePercentView](https://github.com/xiaoshubin/TemplateAndroid/blob/master/SmallUtils/src/main/java/com/smallcake/utils/custom/CirclePercentView.java),圆形进度条
 
 
 
 #### SmallUtils里面的工具类
 
-1.新增可以自定义xml的
+1.新增可以自定义xml的雷达自定义RadarView
 
 2.新增双波纹自定义视图[DynamicWave](https://github.com/xiaoshubin/TemplateAndroid/tree/master/SmallUtils/src/main/java/com/smallcake/utils/custom/DynamicWave.java)
 
