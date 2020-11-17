@@ -13,7 +13,7 @@ Android模板，主要引入两个libary,通用工具类[SmallUtils](https://git
 4. 引入[banner](https://github.com/youth5201314/banner)轮播图
 5. 引入 [glide](https://github.com/bumptech/glide)图片加载，大家都在用
 6. 引入RecyclerView适配器[BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)，大家都说好
-7. 引入[XPopup](https://github.com/li-xiaojun/XPopup),popupWindow必备，且自定义很强
+7. 引入[XPopup](https://github.com/li-xiaojun/XPopup),弹框必备，基于Dialog,且自定义很强
 8. 引入[MagicIndicator](https://github.com/hackware1993/MagicIndicator)，如果TabLayout不能满足你，就用它吧，自定义很强
 9. 引入[XXPermissions](https://github.com/getActivity/XXPermissions)权限管理，6.0以上的手机必备
 10. 引入鲁班压缩[Luban](https://github.com/Curzibn/Luban)，压缩图片必备

@@ -57,6 +57,11 @@ android {
     dataBinding{
         enabled = true
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     android.applicationVariants.all { variant ->
         variant.outputs.all{
             outputFileName  = "${applicationId.subSequence(applicationId.lastIndexOf(".")+1,applicationId.length())}_v${versionName}_${releaseTime()}_${baseName}.apk"

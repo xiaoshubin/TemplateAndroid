@@ -23,33 +23,6 @@ import com.smallcake.template.utils.BottomNavUtils;
  * 2.订单 {@link OrderFragment}
  * 3.我的 {@link MineFragment}
  */
-//        AndPermission.with(this)
-//                .runtime()
-//                .permission(Permission.WRITE_EXTERNAL_STORAGE,Permission.READ_EXTERNAL_STORAGE)
-//                .onGranted(permissions -> {
-//                    ToastUtil.showShort("已经获取了权限");
-//                })
-//                .onDenied(new Action<List<String>>() {
-//                    @Override
-//                    public void onAction(List<String> permissions) {
-//                        ToastUtil.showShort("你拒绝了获取此权限！");
-//                        // 这些权限被用户总是拒绝。
-//                        if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, permissions)) {
-//                            new AlertDialog.Builder(MainActivity.this)
-//                                    .setTitle("权限申请")
-//                                    .setMessage("需要此权限才能使用此功能，去设置？")
-//                                    .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            AppUtils.goIntentSetting(MainActivity.this);
-//                                        }
-//                                    })
-//                                    .setNegativeButton("取消",null)
-//                                    .show();
-//                        }
-//                    }
-//                })
-//                .start();
 public class MainActivity extends BaseBindActivity<ActivityMainBinding> {
     private String[] tabNames = new String[]{"找活", "订单", "我的"};
 
