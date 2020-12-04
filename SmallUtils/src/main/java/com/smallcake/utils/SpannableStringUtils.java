@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Layout;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AlignmentSpan;
@@ -480,7 +479,7 @@ public class SpannableStringUtils {
                 backgroundColor = defaultValue;
             }
             if (radiusBackgroundColor != defaultValue) {
-                mBuilder.setSpan(new RadiusBackgroundSpan(radiusBackgroundColor,radiusBgTxtColor,bgRadius), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                mBuilder.setSpan(new RadiusBackgroundSpan(radiusBackgroundColor,radiusBgTxtColor,bgRadius), start, end, flag);
                 radiusBackgroundColor = defaultValue;
             }
             if (isLeadingMargin) {
