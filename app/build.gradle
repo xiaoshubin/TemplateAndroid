@@ -1,11 +1,10 @@
 apply plugin: 'com.android.application'
-def keystoreFilepath = ''
 def keystorePSW = ''
 def keystoreAlias = ''
 def keystoreAliasPSW = ''
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-keystoreFilepath = properties.getProperty("keystore.path")
+def keystoreFilepath = properties.getProperty("keystore.path")
 def keyfile = ''
 if (keystoreFilepath) {
     keystorePSW = properties.getProperty("keystore.password")
@@ -13,7 +12,8 @@ if (keystoreFilepath) {
     keystoreAliasPSW = properties.getProperty("keystore.alias_password")
     keyfile = file(keystoreFilepath)
 }
-def releaseTime() {
+
+static def releaseTime() {
     return new Date().format("yyyyMMddHHmmss")
 }
 android {
@@ -72,7 +72,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.material:material:1.2.1'
     implementation project(path: ':SmallUtils')
     implementation project(path: ':SmallOkHttp')
@@ -88,10 +88,6 @@ dependencies {
     //Apollo的核心库,事件通知
     implementation 'com.github.lsxiao.Apollo:core:1.0.2'
     annotationProcessor "com.github.lsxiao.Apollo:processor:1.0.2"
-    //数据库
-    implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'io.github.yuweiguocn:GreenDaoUpgradeHelper:v2.2.1'
-    implementation 'org.greenrobot:greendao-generator:3.2.2'
     //JSON
     implementation 'com.alibaba:fastjson:1.1.70.android'
     //Glide图片加载
@@ -103,7 +99,7 @@ dependencies {
     //指示器
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
     //pop弹框
-    implementation 'com.lxj:xpopup:2.0.8'
+    implementation 'com.lxj:xpopup:2.1.16'
     //banner
     implementation 'com.youth.banner:banner:1.4.10'
     //zxing二维码生成扫描，API14+

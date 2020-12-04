@@ -2,10 +2,14 @@ package com.smallcake.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Layout;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.AlignmentSpan;
@@ -18,6 +22,7 @@ import android.text.style.LeadingMarginSpan;
 import android.text.style.MaskFilterSpan;
 import android.text.style.QuoteSpan;
 import android.text.style.RelativeSizeSpan;
+import android.text.style.ReplacementSpan;
 import android.text.style.ScaleXSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -61,6 +66,10 @@ public class SpannableStringUtils {
         @ColorInt
         private int backgroundColor;
         @ColorInt
+        private int radiusBackgroundColor;
+        @ColorInt
+        private int radiusBgTxtColor;
+        @ColorInt
         private int quoteColor;
 
         private boolean isLeadingMargin;
@@ -70,6 +79,7 @@ public class SpannableStringUtils {
         private boolean isBullet;
         private int     gapWidth;
         private int     bulletColor;
+        private int     bgRadius;
 
         private float     proportion;
         private float     xProportion;
@@ -109,6 +119,7 @@ public class SpannableStringUtils {
             foregroundColor = defaultValue;
             backgroundColor = defaultValue;
             quoteColor = defaultValue;
+            radiusBackgroundColor = defaultValue;
             proportion = -1;
             xProportion = -1;
             mBuilder = new SpannableStringBuilder();
@@ -153,6 +164,21 @@ public class SpannableStringUtils {
          */
         public Builder setBackgroundColor(@ColorInt int color) {
             this.backgroundColor = color;
+            return this;
+        }
+
+        /**
+         * 设置圆角背景色
+         *
+         * @param color 背景色
+         * @param txtColor 文本颜色
+         * @param radius 圆角幅度
+         * @return {@link Builder}
+         */
+        public Builder setRadiusBgColor(@ColorInt int color,@ColorInt int txtColor,int radius) {
+            this.radiusBackgroundColor = color;
+            this.bgRadius = radius;
+            this.radiusBgTxtColor = txtColor;
             return this;
         }
 
@@ -453,6 +479,10 @@ public class SpannableStringUtils {
                 mBuilder.setSpan(new BackgroundColorSpan(backgroundColor), start, end, flag);
                 backgroundColor = defaultValue;
             }
+            if (radiusBackgroundColor != defaultValue) {
+                mBuilder.setSpan(new RadiusBackgroundSpan(radiusBackgroundColor,radiusBgTxtColor,bgRadius), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                radiusBackgroundColor = defaultValue;
+            }
             if (isLeadingMargin) {
                 mBuilder.setSpan(new LeadingMarginSpan.Standard(first, rest), start, end, flag);
                 isLeadingMargin = false;
@@ -541,6 +571,48 @@ public class SpannableStringUtils {
                 isBlur = false;
             }
             flag = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
+        }
+    }
+
+    /**
+     * 背景带圆角，可设置颜色，角度
+     * Created by g on 2018/1/23.
+     */
+    public static class RadiusBackgroundSpan extends ReplacementSpan {
+
+        private int mSize;
+        private int mColor;
+        private int mTxtColor;//文字颜色
+        private int mRadius;
+
+        /**
+         * @param color  背景颜色
+         * @param radius 圆角半径
+         */
+        public RadiusBackgroundSpan(@ColorInt int color,@ColorInt int txtColor, int radius) {
+            mColor = color;
+            mRadius = radius;
+            mTxtColor = txtColor;
+        }
+
+        @Override
+        public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+            mSize = (int) (paint.measureText(text, start, end) + 2 * mRadius);
+            //mSize就是span的宽度，span有多宽，开发者可以在这里随便定义规则
+            //我的规则：这里text传入的是SpannableString，start，end对应setSpan方法相关参数
+            //可以根据传入起始截至位置获得截取文字的宽度，最后加上左右两个圆角的半径得到span宽度
+            return mSize;
+        }
+
+        @Override
+        public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
+            paint.setColor(mColor);//设置背景颜色
+            paint.setAntiAlias(true);// 设置画笔的锯齿效果
+            RectF oval = new RectF(x, y + paint.ascent(), x + mSize, y + paint.descent());
+            //设置文字背景矩形，x为span其实左上角相对整个TextView的x值，y为span左上角相对整个View的y值。paint.ascent()获得文字上边缘，paint.descent()获得文字下边缘
+            canvas.drawRoundRect(oval, mRadius, mRadius, paint);//绘制圆角矩形，第二个参数是x半径，第三个参数是y半径
+            paint.setColor(mTxtColor);//恢复画笔的文字颜色
+            canvas.drawText(text, start, end, x + mRadius, y, paint);//绘制文字
         }
     }
 }
